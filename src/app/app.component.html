@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 d-flex m-2 search-container">
+      <div class="col-4">
+        <h2 style="color: orange;">Weather in Your City</h2>
+      </div>
+      <div class="col-8">
+        <div class="search-container">
+          <div class="searchForm" [formGroup]="weatherForm" (keyup.enter)="getWeather()">
+            <input type="text" class="search search-input" placeholder="Enter city" formControlName="city">
+          </div>
+          <button class="search-button  p-1" (click)="getWeather()" [disabled]="!weatherForm?.valid">Search</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="template-container d-flex">
+      <div class="loader" *ngIf="loader">loading...</div>
+      <div class="test m-2" *ngFor="let day of weatherResponse">
+        <table class="center">
+          <tr style="background-color: orange;">
+            <td colspan="2">Date:{{day.dt_txt | date: 'dd/MM/yyyy'}}</td>
+          </tr>
+          <tr style="background-color: gray;">
+            <td colspan="2">Temparature</td>
+          </tr>
+          <tr style="background-color: gray;">
+            <td>Max</td>
+            <td>Min</td>
+          </tr>
+          <tr>
+            <td>{{day.main.temp_max}}</td>
+            <td>{{day.main.temp_min}}</td>
+          </tr>
+          <tr>
+            <td>Pressure</td>
+            <td>{{day.main.pressure}}</td>
+          </tr>
+          <tr>
+            <td>Humidity</td>
+            <td>{{day.main.humidity}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
